@@ -1,0 +1,307 @@
+:root {
+    --primary-color: #4a148c;
+    --secondary-color: #7b1fa2;
+    --accent-color: #e91e63;
+    --light-color: #f5f5f5;
+    --dark-color: #333;
+    --gray-color: #757575;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f9f9f9;
+    color: var(--dark-color);
+    line-height: 1.6;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 20px 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: var(--accent-color);
+}
+
+.eventos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+    padding: 30px 0;
+}
+
+.evento-card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.evento-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.evento-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.evento-info {
+    padding: 20px;
+}
+
+.evento-info h3 {
+    margin-bottom: 10px;
+    color: var(--primary-color);
+}
+
+.evento-info p {
+    margin-bottom: 8px;
+    color: var(--gray-color);
+    font-size: 14px;
+}
+
+.evento-info .fecha {
+    display: flex;
+    align-items: center;
+    color: var(--accent-color);
+    font-weight: 500;
+}
+
+.evento-info .fecha i {
+    margin-right: 8px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+}
+
+.btn:hover {
+    background-color: var(--secondary-color);
+}
+
+.btn-accent {
+    background-color: var(--accent-color);
+}
+
+.btn-accent:hover {
+    background-color: #c2185b;
+}
+
+footer {
+    background-color: var(--dark-color);
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 40px;
+}
+
+/* Estilos para la página de detalle */
+.evento-detalle {
+    display: flex;
+    flex-direction: column;
+    margin: 30px 0;
+}
+
+.evento-detalle-img {
+    width: 100%;
+    max-height: 500px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.evento-detalle-info {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.evento-detalle-meta {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.evento-detalle-meta div {
+    margin-right: 30px;
+    display: flex;
+    align-items: center;
+}
+
+.evento-detalle-meta i {
+    margin-right: 8px;
+    color: var(--accent-color);
+}
+
+.evento-detalle-descripcion {
+    margin-bottom: 20px;
+    line-height: 1.8;
+}
+
+.selector-entradas {
+    margin-top: 20px;
+    padding: 20px;
+    background: #f5f5f5;
+    border-radius: 8px;
+}
+
+.selector-entradas h3 {
+    margin-bottom: 15px;
+}
+
+.entrada-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.entrada-item:last-child {
+    border-bottom: none;
+}
+
+.cantidad-control {
+    display: flex;
+    align-items: center;
+}
+
+.cantidad-control button {
+    width: 30px;
+    height: 30px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.cantidad-control span {
+    margin: 0 10px;
+    min-width: 20px;
+    text-align: center;
+}
+
+/* Estilos para el carrito */
+.carrito-container {
+    margin: 30px 0;
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.carrito-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.carrito-item-img {
+    width: 80px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.carrito-item-info {
+    flex: 1;
+    margin-left: 20px;
+}
+
+.carrito-item-precio {
+    font-weight: bold;
+    color: var(--accent-color);
+}
+
+.carrito-total {
+    margin-top: 20px;
+    text-align: right;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.carrito-acciones {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    .eventos-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+    
+    .evento-detalle-meta {
+        flex-direction: column;
+    }
+    
+    .evento-detalle-meta div {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+    
+    .carrito-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .carrito-item-info {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+} 

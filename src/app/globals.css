@@ -1,0 +1,436 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background: #0a1929; /* Azul muy oscuro */
+  min-height: 100vh;
+}
+
+/* Estilos para el título TINIFEST */
+.tinifest-title {
+  font-size: 6rem;
+  font-weight: 400;
+  text-align: center;
+  color: #9370DB;
+  margin-bottom: 3rem;
+  letter-spacing: 1px;
+  position: relative;
+  text-transform: none;
+  font-family: 'Brush Script MT', 'Brush Script Std', 'Lucida Calligraphy', cursive;
+  line-height: 1.2;
+  padding: 1rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  max-width: 1800px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}
+
+.tinifest-title .reloj {
+  display: inline-block;
+  font-size: 3rem;
+  vertical-align: middle;
+  margin-left: 0.75rem;
+}
+
+.tinifest-subtitle {
+  font-size: 2rem;
+  font-weight: normal;
+  text-transform: none;
+  color: #9370DB;
+  margin-top: 1rem;
+  letter-spacing: 1.5px;
+  font-family: 'Arial', sans-serif;
+  opacity: 0.9;
+}
+
+.tinifest-title::before {
+  display: none;
+}
+
+.tinifest-title::after {
+  content: '';
+  position: absolute;
+  left: 5%;
+  right: 5%;
+  bottom: -35px;
+  height: 1px;
+  background-color: #9370DB; /* Mismo tono que el título */
+  opacity: 0.8; /* Un poco más sutil */
+  z-index: -1;
+}
+
+.container {
+  max-width: 1800px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.event-card {
+  background: white;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.event-card:hover {
+  transform: translateY(-4px);
+}
+
+.event-image {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  border-top-left-radius: 0.75rem;
+  border-top-right-radius: 0.75rem;
+  background-size: cover;
+  background-position: center;
+}
+
+.event-content {
+  padding: 1.5rem;
+}
+
+.event-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 1rem;
+}
+
+.event-price {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #6B46C1;
+  margin-bottom: 1rem;
+}
+
+.event-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: #666;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.info-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: #6B46C1;
+}
+
+.price-card {
+  background: white;
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.price-title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.price-date {
+  color: #666;
+  font-size: 0.875rem;
+  margin-bottom: 2rem;
+}
+
+.price-amount {
+  color: #6B46C1;
+  font-size: 4rem;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+  line-height: 1;
+}
+
+.price-amount span {
+  font-size: 2rem;
+  vertical-align: top;
+  margin-right: 0.25rem;
+}
+
+.language-info {
+  margin-bottom: 2rem;
+  font-size: 0.875rem;
+}
+
+.language-label {
+  font-weight: 500;
+}
+
+.translation-info {
+  color: #666;
+  margin-top: 0.5rem;
+}
+
+.buy-button {
+  background: #FEF9C3;
+  color: #1F2937;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  width: 100%;
+  transition: background-color 0.2s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.buy-button:hover {
+  background: #FDE68A;
+}
+
+@media (max-width: 1024px) {
+  .cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Estilos minimalistas para eventos */
+@layer components {
+  .eventos-grid-minimalista {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 1.5rem;
+    padding: 1.5rem;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+  }
+
+  @media (min-width: 640px) {
+    .eventos-grid-minimalista {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      padding: 1rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .eventos-grid-minimalista {
+      grid-template-columns: repeat(6, 1fr);
+      padding: 1rem;
+      gap: 1rem;
+    }
+  }
+
+  .container {
+    width: 100%;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  main.container {
+    padding: 0;
+    max-width: none;
+  }
+
+  .tinifest-title {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .evento-minimalista {
+    background-color: white;
+    color: #333;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    min-height: 500px;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 2rem;
+    transition: transform 0.2s ease;
+    width: 100%;
+  }
+
+  .evento-minimalista:hover {
+    transform: translateY(-5px);
+  }
+
+  .evento-imagen-container {
+    position: relative;
+    width: 100%;
+    height: 60%;
+    overflow: hidden;
+  }
+
+  .evento-imagen-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 1;
+  }
+
+  .evento-contenido {
+    position: relative;
+    z-index: 10;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    background: white;
+  }
+
+  .evento-titulo {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+    color: #333;
+  }
+
+  .evento-fecha {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .evento-dia {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .evento-mes {
+    font-size: 1.25rem;
+    font-weight: 500;
+    text-transform: capitalize;
+  }
+
+  .evento-año {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: #9CA3AF;
+  }
+
+  .evento-hora {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    color: #9CA3AF;
+  }
+
+  .evento-hora-sufijo {
+    font-size: 1rem;
+    color: #9CA3AF;
+    text-transform: lowercase;
+  }
+
+  .evento-lugar {
+    font-size: 1.5rem;
+    color: #333;
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .evento-lugar::before {
+    content: "📍";
+    font-size: 1.5rem;
+  }
+
+  .evento-descripcion {
+    font-size: 1.5rem;
+    line-height: 1.5;
+    color: #333;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .evento-precio {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-top: 1rem;
+    color: white;
+  }
+
+  .evento-boton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+    padding: 1rem 2rem;
+    background-color: #FF1493;
+    color: white;
+    border-radius: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    box-shadow: 0 4px 6px rgba(255, 20, 147, 0.2);
+  }
+
+  .evento-boton:hover {
+    background-color: #FF69B4;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(255, 20, 147, 0.3);
+  }
+
+  .evento-boton-detalles {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+    padding: 0.75rem 1.5rem;
+    background-color: #f3f4f6;
+    color: #333;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+
+  .evento-boton-detalles:hover {
+    background-color: #e5e7eb;
+  }
+
+  .evento-etiqueta {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: rgba(0, 0, 0, 0.75);
+    color: white;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+} 
