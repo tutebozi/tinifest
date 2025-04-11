@@ -6,6 +6,7 @@ export interface Event {
   price: number;
   date: string;
   time: string;
+  endTime: string;
   location: string;
   capacity: number;
   availableTickets: number;
@@ -19,6 +20,7 @@ export interface EventFormData {
   price: number;
   date: string;
   time: string;
+  endTime: string;
   location: string;
   capacity: number;
   category: string;

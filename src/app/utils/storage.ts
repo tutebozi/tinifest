@@ -14,4 +14,20 @@ export const loadTickets = (): Ticket[] | null => {
     return stored ? JSON.parse(stored) : null;
   }
   return null;
+};
+
+export const getFromStorage = (key: string): any => {
+  if (typeof window === 'undefined') return null;
+  const item = localStorage.getItem(key);
+  return item ? JSON.parse(item) : null;
+};
+
+export const saveToStorage = (key: string, data: any): void => {
+  if (typeof window === 'undefined') return;
+  localStorage.setItem(key, JSON.stringify(data));
+};
+
+export const removeFromStorage = (key: string): void => {
+  if (typeof window === 'undefined') return;
+  localStorage.removeItem(key);
 }; 

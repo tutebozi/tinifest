@@ -47,12 +47,11 @@ export default function Home() {
               <img
                 src={event.imageUrl}
                 alt={event.title}
-                className="w-full h-full object-cover opacity-100"
                 loading={event.id === '1' ? 'eager' : 'lazy'}
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
-                  target.onerror = null; // Prevenir bucle infinito
-                  target.src = '/images/events/placeholder.jpg'; // Imagen por defecto
+                  target.onerror = null;
+                  target.src = '/images/events/placeholder.jpg';
                 }}
               />
             </div>
@@ -69,8 +68,6 @@ export default function Home() {
               <div className="evento-lugar">{event.location}</div>
               
               <div className="evento-descripcion">{event.description}</div>
-              
-              <div className="evento-precio">${event.price}</div>
 
               <Link
                 href={`/comprar/${event.id}`}

@@ -11,13 +11,22 @@
   "dependencies": {
     "@headlessui/react": "^2.2.1",
     "@prisma/client": "^6.6.0",
+    "@sendgrid/mail": "^8.1.5",
     "@stripe/stripe-js": "^7.0.0",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/jsonwebtoken": "^9.0.9",
+    "@types/nodemailer": "^6.4.17",
     "@types/react-dom": "^19.1.2",
+    "bcryptjs": "^3.0.2",
     "date-fns": "^4.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mercadopago": "^2.4.0",
     "next": "^15.3.0",
     "next-auth": "^4.24.11",
+    "nodemailer": "^6.10.0",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "resend": "^4.2.0"
   },
   "devDependencies": {
     "@types/node": "22.14.0",

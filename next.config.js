@@ -41,9 +41,13 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'cloudfront-us-east-1.images.arcpublishing.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.mercadopago.com',
       }
     ],
-    domains: ['media.vogue.mx', 'media.glamour.mx', 'yt3.googleusercontent.com', 'www.rollingstone.com', 'www.billboard.com', 'cirquemessi.com', 'assets.goal.com', 'www.clarin.com', 'www.infobae.com', 'cloudfront-us-east-1.images.arcpublishing.com'],
+    domains: ['media.vogue.mx', 'media.glamour.mx', 'yt3.googleusercontent.com', 'www.rollingstone.com', 'www.billboard.com', 'cirquemessi.com', 'assets.goal.com', 'www.clarin.com', 'www.infobae.com', 'cloudfront-us-east-1.images.arcpublishing.com', 'www.mercadopago.com'],
     unoptimized: false,
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
@@ -51,6 +55,45 @@ const nextConfig = {
     minimumCacheTTL: 60,
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+  },
+  env: {
+    RESEND_API_KEY: process.env.RESEND_API_KEY,
+    NEXT_PUBLIC_DOMAIN: process.env.NEXT_PUBLIC_DOMAIN,
+  },
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'X-DNS-Prefetch-Control',
+            value: 'on'
+          }
+        ],
+      },
+    ]
+  },
+  async rewrites() {
+    return {
+      beforeFiles: [
+        // Redirecciones si las necesitas
+      ]
+    }
+  },
+  async redirects() {
+    return [
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'tinifest.com',
+          },
+        ],
+        permanent: true,
+        destination: 'https://www.tinifest.com/:path*',
+      },
+    ]
   },
 }
 

@@ -267,31 +267,31 @@ body {
     padding: 0;
     position: relative;
     overflow: hidden;
-    min-height: 500px;
-    min-width: 300px;
+    min-height: 600px;
     display: flex;
     flex-direction: column;
     border-radius: 2rem;
     transition: transform 0.2s ease;
     width: 100%;
-  }
-
-  .evento-minimalista:hover {
     transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
   }
 
   .evento-imagen-container {
     position: relative;
     width: 100%;
-    height: 60%;
+    padding-top: 100%; /* Esto crea un contenedor cuadrado */
     overflow: hidden;
   }
 
   .evento-imagen-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 1;
+    object-position: center top;
   }
 
   .evento-contenido {
@@ -371,6 +371,11 @@ body {
     color: #333;
     margin-top: 1rem;
     margin-bottom: 1rem;
+    flex-grow: 1;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
   }
 
   .evento-precio {
@@ -384,7 +389,7 @@ body {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    margin-top: 1rem;
+    margin-top: auto;
     padding: 1rem 2rem;
     background-color: #FF1493;
     color: white;
@@ -395,6 +400,7 @@ body {
     text-transform: uppercase;
     letter-spacing: 0.05em;
     box-shadow: 0 4px 6px rgba(255, 20, 147, 0.2);
+    width: 100%;
   }
 
   .evento-boton:hover {
