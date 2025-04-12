@@ -1,8 +1,9 @@
-import React from 'react';
+'use client';
+
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { tickets } from '../../data/tickets';
-import { useState } from 'react';
 import Image from 'next/image';
 
 export default function TicketPurchase({ params }: { params: { id: string } }) {
