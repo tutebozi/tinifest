@@ -7,6 +7,8 @@ const nextConfig = {
         hostname: '*',
       }
     ],
+    domains: ['www.mercadopago.com'],
+    unoptimized: true
   },
   async headers() {
     return [
@@ -22,7 +24,23 @@ const nextConfig = {
     ]
   },
   poweredByHeader: false,
-  reactStrictMode: true
+  reactStrictMode: true,
+  async rewrites() {
+    return {
+      beforeFiles: [
+        {
+          source: '/:path*',
+          has: [
+            {
+              type: 'host',
+              value: 'tinifest.com',
+            },
+          ],
+          destination: 'https://www.tinifest.com/:path*',
+        },
+      ],
+    }
+  }
 }
 
 module.exports = nextConfig 
