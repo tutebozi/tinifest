@@ -6,7 +6,13 @@ import { notFound } from 'next/navigation';
 import { tickets } from '../../data/tickets';
 import Image from 'next/image';
 
-export default function TicketPurchase({ params }: { params: { id: string } }) {
+interface PageProps {
+  params: {
+    id: string;
+  };
+}
+
+export default function TicketPurchase({ params }: PageProps) {
   const [quantity, setQuantity] = useState(1);
   const [isProcessing, setIsProcessing] = useState(false);
   const ticket = tickets.find(t => t.id === params.id);
@@ -48,7 +54,7 @@ export default function TicketPurchase({ params }: { params: { id: string } }) {
   };
 
   return (
-    <div className="container py-8">
+    <div className="container mx-auto py-8 px-4">
       <Link href="/" className="text-white mb-8 inline-block hover:underline">
         ← Volver a tickets
       </Link>
