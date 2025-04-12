@@ -45,9 +45,13 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'www.mercadopago.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.tinifest.com',
       }
     ],
-    domains: ['media.vogue.mx', 'media.glamour.mx', 'yt3.googleusercontent.com', 'www.rollingstone.com', 'www.billboard.com', 'cirquemessi.com', 'assets.goal.com', 'www.clarin.com', 'www.infobae.com', 'cloudfront-us-east-1.images.arcpublishing.com', 'www.mercadopago.com'],
+    domains: ['media.vogue.mx', 'media.glamour.mx', 'yt3.googleusercontent.com', 'www.rollingstone.com', 'www.billboard.com', 'cirquemessi.com', 'assets.goal.com', 'www.clarin.com', 'www.infobae.com', 'cloudfront-us-east-1.images.arcpublishing.com', 'www.mercadopago.com', 'www.tinifest.com'],
     unoptimized: false,
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
@@ -59,6 +63,7 @@ const nextConfig = {
   env: {
     RESEND_API_KEY: process.env.RESEND_API_KEY,
     NEXT_PUBLIC_DOMAIN: process.env.NEXT_PUBLIC_DOMAIN,
+    NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
   },
   async headers() {
     return [
