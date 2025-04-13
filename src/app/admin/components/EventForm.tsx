@@ -11,21 +11,26 @@ export default function EventForm({ onSubmit, initialData }: EventFormProps) {
   const [formData, setFormData] = useState<EventFormData>({
     title: '',
     description: '',
+    imageUrl: '',
+    artistImageUrl: '',
+    coverImageUrl: '',
+    price: 0,
     date: '',
     time: '',
     endTime: '',
     location: '',
-    price: 0,
     capacity: 0,
-    artistImageUrl: '',
-    coverImageUrl: '',
+    category: '',
     benefits: [],
     language: '',
     ...initialData
   });
 
   return (
-    <form onSubmit={() => onSubmit(formData)} className="space-y-6">
+    <form onSubmit={(e) => {
+      e.preventDefault();
+      onSubmit(formData);
+    }} className="space-y-6">
       <div>
         <label className="block text-sm font-medium text-gray-700">
           Título del evento
@@ -49,6 +54,14 @@ export default function EventForm({ onSubmit, initialData }: EventFormProps) {
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500"
           rows={4}
           required
+        />
+      </div>
+
+      <div>
+        <ImageUpload
+          imageUrl={formData.imageUrl}
+          onImageChange={(url) => setFormData({ ...formData, imageUrl: url })}
+          label="Imagen principal"
         />
       </div>
 
