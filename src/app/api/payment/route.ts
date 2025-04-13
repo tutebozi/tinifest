@@ -1,50 +1,46 @@
 import { NextResponse } from 'next/server';
-import mercadopago from 'mercadopago';
+import { MercadoPagoConfig, Preference } from 'mercadopago';
 import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-// Configurar MercadoPago
-mercadopago.configure({
-  access_token: process.env.MERCADO_PAGO_ACCESS_TOKEN || ''
+const client = new MercadoPagoConfig({
+  accessToken: process.env.MERCADO_PAGO_ACCESS_TOKEN || ''
 });
 
 export async function POST(request: Request) {
   try {
-    const { items, userEmail, eventDetails } = await request.json();
+    const body = await request.json();
+    const { items, payer } = body;
 
-    // Crear preferencia de pago
-    const preference = {
-      items: items.map((item: any) => ({
-        title: item.title,
-        unit_price: item.price,
-        quantity: item.quantity,
-        currency_id: 'ARS'
-      })),
-      back_urls: {
-        success: `${process.env.NEXT_PUBLIC_BASE_URL}/payment/success`,
-        failure: `${process.env.NEXT_PUBLIC_BASE_URL}/payment/failure`,
-        pending: `${process.env.NEXT_PUBLIC_BASE_URL}/payment/pending`
-      },
-      auto_return: 'approved',
-      notification_url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/payment/webhook`,
-      external_reference: JSON.stringify({
-        userEmail,
-        eventDetails,
-        items
-      })
-    };
-
-    const response = await mercadopago.preferences.create(preference);
-
-    return NextResponse.json({
-      id: response.body.id,
-      init_point: response.body.init_point
+    const preference = new Preference(client);
+    const result = await preference.create({
+      body: {
+        items: items.map((item: any) => ({
+          title: item.title,
+          unit_price: item.price,
+          quantity: item.quantity,
+          currency_id: 'ARS'
+        })),
+        payer: {
+          email: payer.email,
+          name: payer.name,
+          identification: payer.identification
+        },
+        back_urls: {
+          success: `${process.env.NEXT_PUBLIC_BASE_URL}/compra-exitosa`,
+          failure: `${process.env.NEXT_PUBLIC_BASE_URL}/compra-fallida`,
+          pending: `${process.env.NEXT_PUBLIC_BASE_URL}/compra-pendiente`
+        },
+        auto_return: 'approved'
+      }
     });
+
+    return NextResponse.json(result);
   } catch (error) {
-    console.error('Error creating payment:', error);
+    console.error('Error creating preference:', error);
     return NextResponse.json(
-      { error: 'Error al crear el pago' },
+      { error: 'Error creating payment preference' },
       { status: 500 }
     );
   }

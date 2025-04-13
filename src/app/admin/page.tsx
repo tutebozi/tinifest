@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import EventForm from '../components/EventForm';
 import RRPPManagement from './components/RRPPManagement';
 import UserList from './components/UserList';
-import { Event } from '../types';
+import { Event, EventFormData } from '../types';
 import { getEvents, saveEvent, deleteEvent, updateEvent } from '../services/eventService';
 
 export default function AdminPage() {
@@ -17,7 +17,7 @@ export default function AdminPage() {
     setEvents(getEvents());
   }, []);
 
-  const handleSaveEvent = (eventData: any) => {
+  const handleSaveEvent = (eventData: EventFormData) => {
     if (editingEvent) {
       updateEvent(editingEvent.id, eventData);
     } else {
@@ -26,6 +26,25 @@ export default function AdminPage() {
     setEvents(getEvents());
     setIsAddingEvent(false);
     setEditingEvent(null);
+  };
+
+  const convertEventToFormData = (event: Event): EventFormData => {
+    return {
+      title: event.title,
+      description: event.description,
+      imageUrl: event.imageUrl,
+      artistImageUrl: event.artistImageUrl,
+      coverImageUrl: event.imageUrl,
+      price: event.price,
+      date: event.date,
+      time: event.time,
+      endTime: event.endTime || event.time,
+      location: event.location,
+      capacity: event.capacity,
+      category: event.category,
+      benefits: [],
+      language: 'es'
+    };
   };
 
   const handleEditEvent = (event: Event) => {
@@ -103,7 +122,7 @@ export default function AdminPage() {
             <EventForm
               onSubmit={handleSaveEvent}
               onCancel={handleCancel}
-              initialData={editingEvent || undefined}
+              initialData={editingEvent ? convertEventToFormData(editingEvent) : undefined}
             />
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { RRPP, RRPPFormData } from '../types';
+import type { RRPP, RRPPFormData } from '@/app/types';
 import { getRRPPList, createRRPP, updateRRPP, deleteRRPP, getSalesByRRPP, generateRRPPLink } from '../services/rrppService';
 
 export default function RRPPManagement() {
@@ -11,7 +11,7 @@ export default function RRPPManagement() {
     name: '',
     email: '',
     phone: '',
-    commission: 10, // Comisión por defecto del 10%
+    commission: 10,
     active: true
   });
   const [isEditing, setIsEditing] = useState(false);

@@ -1,4 +1,4 @@
-import { RRPP, Sale } from '../types';
+import type { RRPP, RRPPFormData, Sale } from '@/app/types';
 import { v4 as uuidv4 } from 'uuid';
 
 const RRPP_STORAGE_KEY = 'rrpp_list';
@@ -53,16 +53,19 @@ export const getRRPPByCode = (code: string): RRPP | undefined => {
 };
 
 // Crear nuevo RRPP
-export const createRRPP = (rrppData: Omit<RRPP, 'id' | 'totalSales' | 'code'>): RRPP => {
+export const createRRPP = (rrppData: RRPPFormData): RRPP => {
   console.log('Creating RRPP with data:', rrppData);
-  const code = generateRRPPCode(rrppData.name);
+  const code = rrppData.code || generateRRPPCode(rrppData.name);
   console.log('Generated code:', code);
   
+  const now = new Date().toISOString();
   const newRRPP: RRPP = {
     ...rrppData,
     id: uuidv4(),
+    code,
     totalSales: 0,
-    code
+    createdAt: now,
+    updatedAt: now
   };
   
   console.log('New RRPP object:', newRRPP);
@@ -75,15 +78,17 @@ export const createRRPP = (rrppData: Omit<RRPP, 'id' | 'totalSales' | 'code'>): 
 };
 
 // Actualizar RRPP existente
-export const updateRRPP = (id: string, rrppData: Partial<RRPP>): RRPP | null => {
+export const updateRRPP = (id: string, rrppData: Partial<Omit<RRPP, 'id' | 'createdAt' | 'updatedAt'>>): RRPP | null => {
   const rrppList = getRRPPList();
   const index = rrppList.findIndex(rrpp => rrpp.id === id);
   
   if (index === -1) return null;
   
+  const now = new Date().toISOString();
   rrppList[index] = {
     ...rrppList[index],
-    ...rrppData
+    ...rrppData,
+    updatedAt: now
   };
   
   saveToStorage(RRPP_STORAGE_KEY, rrppList);
@@ -96,11 +101,12 @@ export const getSales = (): Sale[] => {
 };
 
 // Crear nueva venta
-export const createSale = (saleData: Omit<Sale, 'id' | 'date'>): Sale => {
+export const createSale = (saleData: Omit<Sale, 'id' | 'createdAt'>): Sale => {
   const newSale: Sale = {
     ...saleData,
     id: uuidv4(),
-    date: new Date().toISOString()
+    createdAt: new Date().toISOString(),
+    customerEmail: saleData.buyerEmail || saleData.customerEmail // Asegurarnos de tener un email válido
   };
   
   const sales = getSales();
@@ -111,8 +117,9 @@ export const createSale = (saleData: Omit<Sale, 'id' | 'date'>): Sale => {
   if (saleData.rrppCode) {
     const rrpp = getRRPPByCode(saleData.rrppCode);
     if (rrpp) {
+      const saleAmount = typeof saleData.totalAmount === 'number' ? saleData.totalAmount : saleData.amount;
       updateRRPP(rrpp.id, {
-        totalSales: rrpp.totalSales + saleData.totalAmount
+        totalSales: rrpp.totalSales + saleAmount
       });
     }
   }

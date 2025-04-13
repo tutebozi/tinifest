@@ -13,13 +13,17 @@ const defaultFormData: EventFormData = {
   title: '',
   description: '',
   imageUrl: '',
+  artistImageUrl: '',
+  coverImageUrl: '',
   price: 0,
   date: '',
   time: '',
   endTime: '',
   location: '',
   capacity: 0,
-  category: ''
+  category: '',
+  benefits: [],
+  language: 'es'
 };
 
 export default function EventForm({ initialData = defaultFormData, onSubmit, onCancel }: EventFormProps) {

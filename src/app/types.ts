@@ -1,3 +1,27 @@
+// Tipos base para RRPP
+export interface RRPP {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  code: string;
+  commission: number;
+  active: boolean;
+  totalSales: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface RRPPFormData {
+  name: string;
+  email: string;
+  phone: string;
+  code?: string;
+  commission: number;
+  active: boolean;
+}
+
+// Tipos base para Eventos
 export interface Event {
   id: string;
   title: string;
@@ -12,28 +36,6 @@ export interface Event {
   capacity: number;
   availableTickets: number;
   category: string;
-}
-
-export interface RRPP {
-  id: string;
-  name: string;
-  code: string;
-  email: string;
-  commission: number; // Porcentaje de comisión
-  totalSales: number;
-  active: boolean;
-}
-
-export interface Sale {
-  id: string;
-  eventId: string;
-  quantity: number;
-  totalAmount: number;
-  rrppCode?: string;
-  rrppCommission?: number;
-  buyerEmail: string;
-  date: string;
-  status: 'pending' | 'completed' | 'cancelled';
 }
 
 export interface PublicEvent {
@@ -67,4 +69,20 @@ export interface EventFormData {
   benefits: string[];
   language: string;
 }
- 
+
+// Tipos base para Ventas
+export interface Sale {
+  id: string;
+  eventId: string;
+  rrppCode?: string;
+  amount: number;
+  quantity: number;
+  totalAmount: number;
+  customerEmail: string;
+  buyerEmail?: string;
+  createdAt: string;
+  date?: string;
+  status: 'pending' | 'completed' | 'cancelled';
+  paymentMethod: 'mercadopago' | 'card';
+  rrppCommission?: number;
+} 
