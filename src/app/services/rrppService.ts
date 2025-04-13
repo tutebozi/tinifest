@@ -1,4 +1,4 @@
-import { RRPP, RRPPFormData, Sale } from '../admin/types';
+import { RRPP, RRPPFormData, Sale } from '../types';
 import { v4 as uuidv4 } from 'uuid';
 
 // Funciones auxiliares para localStorage
@@ -26,14 +26,18 @@ export const getRRPPByCode = (code: string): RRPP | undefined => {
 export const createRRPP = (data: RRPPFormData): RRPP => {
   const rrppList = getRRPPList();
   
+  // Generar un código único si no se proporciona uno
+  const code = data.code || `RRPP${Math.random().toString(36).substr(2, 6).toUpperCase()}`;
+  
   // Verificar si el código ya existe
-  if (rrppList.some(rrpp => rrpp.code === data.code)) {
+  if (rrppList.some(rrpp => rrpp.code === code)) {
     throw new Error('El código RRPP ya existe');
   }
 
   const newRRPP: RRPP = {
     ...data,
     id: uuidv4(),
+    code,
     totalSales: 0,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString()
