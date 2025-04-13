@@ -1,16 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { EventFormData } from '../../types';
 import ImageUpload from './ImageUpload';
 
 interface EventFormProps {
-  formData: EventFormData;
-  setFormData: (data: EventFormData) => void;
-  onSubmit: (e: React.FormEvent) => void;
+  onSubmit: (data: EventFormData) => void;
+  initialData?: Partial<EventFormData>;
 }
 
-export default function EventForm({ formData, setFormData, onSubmit }: EventFormProps) {
+export default function EventForm({ onSubmit, initialData }: EventFormProps) {
+  const [formData, setFormData] = useState<EventFormData>({
+    title: '',
+    description: '',
+    date: '',
+    time: '',
+    endTime: '',
+    location: '',
+    price: 0,
+    capacity: 0,
+    artistImageUrl: '',
+    coverImageUrl: '',
+    benefits: [],
+    language: '',
+    ...initialData
+  });
+
   return (
-    <form onSubmit={onSubmit} className="space-y-6">
+    <form onSubmit={() => onSubmit(formData)} className="space-y-6">
       <div>
         <label className="block text-sm font-medium text-gray-700">
           Título del evento
@@ -39,8 +54,8 @@ export default function EventForm({ formData, setFormData, onSubmit }: EventForm
 
       <div>
         <ImageUpload
-          imageUrl={formData.imageUrl}
-          onImageChange={(url) => setFormData({ ...formData, imageUrl: url })}
+          imageUrl={formData.coverImageUrl}
+          onImageChange={(url) => setFormData({ ...formData, coverImageUrl: url })}
           label="Imagen del evento"
         />
       </div>

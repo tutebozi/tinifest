@@ -55,12 +55,16 @@ export interface EventFormData {
   title: string;
   description: string;
   imageUrl: string;
+  artistImageUrl: string;
+  coverImageUrl: string;
   price: number;
   date: string;
   time: string;
-  endTime?: string;
+  endTime: string;
   location: string;
   capacity: number;
   category: string;
+  benefits: string[];
+  language: string;
 }
  
