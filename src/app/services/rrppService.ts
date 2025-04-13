@@ -3,27 +3,39 @@ import { v4 as uuidv4 } from 'uuid';
 
 // Funciones auxiliares para localStorage
 const getFromStorage = <T>(key: string): T[] => {
-  if (typeof window === 'undefined') return [];
-  const data = localStorage.getItem(key);
-  return data ? JSON.parse(data) : [];
+  try {
+    if (typeof window === 'undefined') return [];
+    const data = window.localStorage.getItem(key);
+    return data ? JSON.parse(data) : [];
+  } catch (error) {
+    console.error(`Error al obtener datos de ${key}:`, error);
+    return [];
+  }
 };
 
 const saveToStorage = <T>(key: string, data: T[]): void => {
-  if (typeof window === 'undefined') return;
-  localStorage.setItem(key, JSON.stringify(data));
+  try {
+    if (typeof window === 'undefined') return;
+    window.localStorage.setItem(key, JSON.stringify(data));
+  } catch (error) {
+    console.error(`Error al guardar datos en ${key}:`, error);
+  }
 };
 
 // Funciones de RRPP
 export const getRRPPList = (): RRPP[] => {
+  'use client';
   return getFromStorage<RRPP>('rrppList');
 };
 
 export const getRRPPByCode = (code: string): RRPP | undefined => {
+  'use client';
   const rrppList = getRRPPList();
   return rrppList.find(rrpp => rrpp.code === code);
 };
 
 export const createRRPP = (data: RRPPFormData): RRPP => {
+  'use client';
   const rrppList = getRRPPList();
   
   // Generar un código único si no se proporciona uno
